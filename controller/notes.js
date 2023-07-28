@@ -4,7 +4,11 @@ module.exports.renderNewNote = (req, res) => {
     res.render('notes/new');
 }
 module.exports.createNote = async (req, res) => {
-    const { title, content } = req.body;
+    let { title, content } = req.body;
+    if (!title.trim())
+        title='You didn\'t create any title';
+    if (!content.trim())
+        content='Empty Note';
     const note = new Notes({ title, content });
     note.user = req.user._id;
     let now = new Date();
