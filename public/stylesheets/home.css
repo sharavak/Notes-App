@@ -1,0 +1,11 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+}
+body{
+   /* background: no-repeat url("https://img.freepik.com/free-vector/notes-concept-illustration_114360-689.jpg?w=740&t=st=1689932954~exp=1689933554~hmac=cc62ab37876aa97bd89fea0bbe8ae34be11679e28e9c2e568adb2210346d58bb");*/
+    background: no-repeat url("https://imagetolink.com/ib/Pfylykl5x8.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}

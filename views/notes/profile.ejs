@@ -1,0 +1,26 @@
+<% layout('/layouts/boilerplate') %>
+<h4 class="text-center">Profile</h4>
+<div class="container">
+<div class="row g-3">
+  <form action="/profile" method="post" enctype="multipart/form-data" class="row g-3 mt-5 align-items-center" >
+    <div class="col-12 text-center">
+    <img src="<%= user.profilePic%>" style="border-radius:50% ;width:100px;height:100px"  class="img-fluid" alt="profileImage" >
+    </div>
+    <div class="col-sm-12 col-md-8 m-auto">
+      <label for="user" class="form-label d-block text-white text-center">Username</label>
+      <input type="text" class="form-control  m-auto" id="user" name="username" value="<%=user.username%>">
+    </div>
+    <div class="col-sm-12 col-md-8 mb-2 m-auto">
+      <label for="bio" class="form-label d-block text-center text-white">Your bio</label>
+      <textarea class="form-control m-auto" id="bio" rows="4" name="bio" ><%=user.bio %></textarea>
+    </div>
+    <div class="col-sm-12  col-md-6  m-auto">
+      <label for="formFile" class="form-label d-block text-center text-white">Upload your Profile Picture</label>
+      <input class="form-control m-auto" type="file" id="formFile" name="profilePic">
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-success m-auto d-block">Update</button>
+    </div>
+  </form>
+</div>
+</div>

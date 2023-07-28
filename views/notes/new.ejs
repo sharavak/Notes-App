@@ -1,0 +1,33 @@
+
+<% layout('/layouts/boilerplate') %>
+
+<link rel="stylesheet" href="/stylesheets/textarea.css">
+    <div class="container">
+    <h3 class="text-center">Create your notes here</h3>
+    <form action="/new" method="POST" class="row g-3 mt-4">
+        <div class="mb-3 text-center">
+        <label for="title" class="form-label text-white">Enter your Title</label>
+        <input type="text" class="form-control d-block m-auto" id="title" placeholder="type your title" name="title">
+        </div>
+        <div class="mb-3 text-center">
+        <label for="content" class="form-label text-white">Your content</label>
+        <textarea  id="content" rows="7"  name="content" placeholder="write your notes here"></textarea>
+        </div>
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+</div>
+</form>
+<style>
+#title{
+    width: 35rem;
+    max-width: 100%;
+    background-color: #def18f;
+    color: #000;
+font-weight:600;
+}
+#content{
+    width: 35rem;
+    max-width: 100%;
+}
+</style>

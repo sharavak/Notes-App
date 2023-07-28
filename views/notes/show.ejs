@@ -1,0 +1,79 @@
+<% layout('/layouts/boilerplate') %>
+
+  <link rel="stylesheet" href="/stylesheets/textarea.css">
+  <% if (notes && notes.length>0){ %>
+    <div class="row gx-4 mt-3">
+      <% for(let i=notes.length-1;i>=0;i--){ %>
+        <div class="col-sm-6 col-lg-4 col-md-6 mt-5">
+          <div class="col d-flex flex-column justify-content-between mb-3">
+            <% if(notes[i].offsetCreated>=0 || notes[i].offsetCreated<=0){ %>
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item" style="width: 20rem; max-width: 100%; margin: 0 auto;">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne+<%=i%>" aria-expanded="true" aria-controls="collapseOne">Show
+                        Details</button>
+                    </h2>
+                    <div id="collapseOne+<%=i%>" class="accordion-collapse collapse show+<%=i%>"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <section style="display: flex; flex-direction: column; align-items: center;">
+                          <span>Created At: <strong>
+                              <%= new Date( notes[i].created.getTime() - ( -330 * 60000
+                                )).toLocaleTimeString({ timezone: "Asia/Kolkata" })%> <%= new Date(notes[i].created.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" }) %>
+                          </strong></span>
+
+                          <% if(notes[i].offsetUpdated.trim().length>0){ %>
+                            <span>Updated At: <strong>
+                                <%= new Date(notes[i].updated.getTime()-( Number.parseInt(-330) *
+                                  60000 )).toLocaleTimeString({ timezone: "Asia/Kolkata" })%> <%= new Date(notes[i].updated.getTime()-(330*60000)).toLocaleDateString({ timezone: "Asia/Calcutta" }) %>
+                              </strong></span>
+                            <% } else {%>
+                              <span style="margin-top: 1.5rem;"></span>
+                              <% } %>
+                                <span class="text-center mt-1">Title: <b>
+                                    <%=notes[i].title%>
+                                  </b></span>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                  <textarea class="overflow-hidden border border-0" rows="5" readonly><%=notes[i].content%></textarea>
+                  <div class="d-flex mt-3 justify-content-around">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                      data-bs-target="#exampleModalCenter">Delete</button>
+                    <a href="/edit/<%= notes[i]._id %>"><button class="btn btn-info">Edit</button></a>
+                  </div>
+          </div>
+
+
+
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+            style="display: none;" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Delete Note</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure want to Delete?</p>
+                </div>
+                <div class="modal-footer">
+                  <form action="/delete/<%=notes[i]._id%>?_method=DELETE" method="post" class="d-inline-block">
+                    <button class="btn btn-danger" id="del">Delete</button>
+                  </form>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+    <% }else {%>
+      <h1 class="text-center">Create Your Notes!!!</h1>
+      <% } %> %>

@@ -1,0 +1,76 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/textarea.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+            <section style="display: flex; flex-direction: column; align-items: center;" class="mt-5">
+            <form action="/edit/<%=note._id%>?_method=PUT" method="post">
+                <label for="title" class="form-label mt-4">Type your title</label>
+                <input class="form-control" type="text" placeholder="type your title" name="title" id="title"  aria-label="default input example" value="<%= note.title %>">
+                <div class="mb-3">
+                    <label for="content" class="form-label">Type your content</label>
+                    <textarea   id="content" name="content"><%= note.content %></textarea>
+                </div>
+                <button class="btn btn-info">update</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable" id="view">View</button>
+            </form>
+           </section>
+<button class="btn btn-dark mt-2 d-block" id="download" style="margin: 0 auto;">Download</button>
+  <div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="exampleModalCenteredScrollableTitle"><%= note.title %></h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <textarea  style="margin: 1% 2%; width: 27rem;" id="con" readonly rows="10"><%= note.content%> </textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+#title{
+  background-color: #def18f;
+}
+#content{
+  height: 17rem;
+    width: 30rem;
+}
+@media(max-width: 490px){
+   #content{
+        width: 27rem;
+    }
+}
+@media(max-width: 450px){
+   #content{
+        width: 75vw;
+    }
+}
+</style>
+<script>
+const del = document.querySelector('#view');
+const modalBody = document.querySelector('#con');
+const content = document.querySelector('#content');
+const title = document.querySelector('#title');
+const modal = document.querySelector('#exampleModalCenteredScrollable');
+const modalTitle = document.querySelector('#exampleModalCenteredScrollableTitle');
+const download = document.querySelector('#download');
+del.addEventListener('click',()=>{
+    modalBody.textContent = content.value;
+    modalTitle.textContent = title.value;
+});
+download.addEventListener('click',function(){
+    let file = new File(["\ufeff" + content.value], `${title.value}.txt`, { type: "text/plain:charset=UTF-8" });
+    let url = window.URL.createObjectURL(file);
+    let anchor = document.createElement("a");
+    anchor.style = "display: none";
+    anchor.href = url;
+    anchor.download = file.name;
+    anchor.click();
+    window.URL.revokeObjectURL(url);
+});
+</script>
+<script slot="javascripts/custommodal.js"></script>

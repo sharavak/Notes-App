@@ -1,0 +1,16 @@
+textarea
+{
+    border: 1px solid #ffffff;
+    box-shadow: 1px 1px 0 #fcf8f8;
+    display: block;
+    font-family: 'Marck Script',cursive;
+    font-size: 1.1rem;
+    line-height: 3rem;
+    margin: 0 auto;
+    padding: 0.8rem 1.1rem 0 2.5rem;
+    /*height: 17rem;
+    width: 30rem;*/
+    resize: none;
+    background-image: -webkit-linear-gradient(top , transparent, transparent 48px,#eaff9f 0), -webkit-radial-gradient(4% 50%, circle closest-corner, #fff2f2, #ffffff 45%,transparent 0%), -webkit-radial-gradient(2.9% 43%, circle closest-corner, #e7e709, #030202 46.5%, #DEF18F 0%);
+    background-size: 100% 50px;
+} 
