@@ -71,12 +71,6 @@ app.use(mongoSanitize({
     replaceWith: '_'
 }))
 
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride('_method'));
 
 app.use(flash());
 app.use(passport.initialize());
@@ -98,7 +92,6 @@ app.use( async(req, res, next) => {
 
 
 app.get('/', function (req, res) {
-    console.log(req.user,req.sessionID,req.originalUrl,req.path);
     res.render('notes/home');
 });
 app.get('/profile',middleware.isLoggedIn,async function (req, res) {
@@ -117,7 +110,6 @@ app.post('/profile',middleware.isLoggedIn,upload.single('profilePic') ,async fun
         formData.append('image', req.file.buffer.toString('base64'));
         let apiKey=process.env.APIKEY;
         let url=`https://api.imgbb.com/1/upload?key=${apiKey}`;
-        console.log(req.user._id);
         try {
            let  data=await axios({
                 method: 'post',
